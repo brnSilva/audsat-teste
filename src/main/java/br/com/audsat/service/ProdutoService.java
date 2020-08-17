@@ -11,14 +11,14 @@ public class ProdutoService {
 
 	public ProdutoDTO obtemValorComComissao(Double valor) {
 	
-		Double comissaoVendedor = 0.05;
-		Double lucroVenda = 0.4;
-		Double lucroVendaComDesconto = 0.3;
-		Double descontoCliente = 0.1;
-		Double valorParaDesconto = 5000.0;
-		Double comissaoTotal;
-		Double descontoTotal = 0.0;
-		DecimalFormat df = new DecimalFormat("###,###,##0.00");
+		var comissaoVendedor = 0.05;
+		var lucroVenda = 0.4;
+		var lucroVendaComDesconto = 0.3;
+		var descontoCliente = 0.1;
+		var valorParaDesconto = 5000.0;
+		var comissaoTotal = 0.0;
+		var descontoTotal = 0.0;
+		var df = new DecimalFormat("###,###,##0.00");
 		
 		comissaoTotal = (valor * comissaoVendedor);
 		valor += comissaoTotal;
@@ -31,9 +31,9 @@ public class ProdutoService {
 		}
 
 		return ProdutoDTO.builder()
-				.valorTotal("R$ "+df.format(valor))
-				.desconto("R$ "+df.format(descontoTotal))
-				.comissao("R$ "+df.format(comissaoTotal))
+				.valorTotal(df.format(valor))
+				.desconto(df.format(descontoTotal))
+				.comissao(df.format(comissaoTotal))
 				.build();
 	}
 }
