@@ -14,6 +14,20 @@ class ProdutoServiceTest {
 	private ProdutoService produtoService = new ProdutoService();
 	
 	@Test
+	void testObtemValorComComissaoSemDescontoComCentavos() {
+		
+		var retorno = produtoService.obtemValorComComissao(456.32);
+		
+		var retornoEsperado = ProdutoDTO.builder()
+								.valorTotal("670,79")
+								.desconto("0,00")
+								.comissao("22,82")
+								.build();
+		
+		assertEquals(retornoEsperado, retorno);
+	}
+	
+	@Test
 	void testObtemValorComComissaoSemDesconto() {
 		
 		var retorno = produtoService.obtemValorComComissao(500.0);
@@ -36,6 +50,34 @@ class ProdutoServiceTest {
 								.valorTotal("6.825,00")
 								.desconto("525,00")
 								.comissao("250,00")
+								.build();
+		
+		assertEquals(retornoEsperado, retorno);
+	}
+	
+	@Test
+	void testObtemValorComComissaoComDescontoComCentavos() {
+		
+		var retorno = produtoService.obtemValorComComissao(5009.99);
+		
+		var retornoEsperado = ProdutoDTO.builder()
+								.valorTotal("6.838,64")
+								.desconto("526,05")
+								.comissao("250,50")
+								.build();
+		
+		assertEquals(retornoEsperado, retorno);
+	}
+	
+	@Test
+	void testObtemValorComComissaoComDescontoEmMilhoes() {
+		
+		var retorno = produtoService.obtemValorComComissao(1500420.0);
+		
+		var retornoEsperado = ProdutoDTO.builder()
+								.valorTotal("2.048.073,30")
+								.desconto("157.544,10")
+								.comissao("75.021,00")
 								.build();
 		
 		assertEquals(retornoEsperado, retorno);

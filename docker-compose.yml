@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  audsat-teste-api:
+    container_name: audsat-teste-api
+    image: maven
+    volumes:
+      - "./:/deploy"
+    working_dir: "/deploy"
+    ports:
+      - 8080:8080
+    restart: always
+    command: bash -c "mvn clean && mvn install && java -jar target/audsat-teste*.jar"
+    
+    

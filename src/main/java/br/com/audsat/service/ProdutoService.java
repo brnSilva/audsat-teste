@@ -1,6 +1,7 @@
 package br.com.audsat.service;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,11 @@ public class ProdutoService {
 		var valorParaDesconto = 5000.0;
 		var comissaoTotal = 0.0;
 		var descontoTotal = 0.0;
-		var df = new DecimalFormat("###,###,##0.00");
+		
+		var unusualSymbols = new DecimalFormatSymbols();
+		unusualSymbols.setDecimalSeparator(',');
+		unusualSymbols.setGroupingSeparator('.');
+		var df = new DecimalFormat("#,##0.00", unusualSymbols);
 		
 		comissaoTotal = (valor * comissaoVendedor);
 		valor += comissaoTotal;
