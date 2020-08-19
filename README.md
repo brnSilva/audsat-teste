@@ -4,13 +4,13 @@ A API Audsat-Teste-API é um projeto que tem o objetivo de retornar o valor de u
 
 ## Como executar
 A API foi construida para rodar em containers docker, então após baixar o projeto git, abrir o cmd dentro do local onde estiver o projeto e executar o comando abaixo:
-
-  - docker-compose up -d audsat-teste-api
-  
+``sh
+docker-compose up -d audsat-teste-api
+``
 Após baixar todas as dependencias do projeto o serviço estará disponível para utilização no link abaixo:
-
-  - http://localhost:8080/audsat/bff/teste/swagger-ui.html
-
+``sh
+http://localhost:8080/audsat/bff/teste/swagger-ui.html
+``
 
 
 ## REST API
@@ -20,9 +20,33 @@ Após baixar todas as dependencias do projeto o serviço estará disponível par
 
 
 #### EndPoint completo:
-  - http://localhost:8080/audsat/bff/teste/produtos/valor/{valor}
-  
+``sh
+http://localhost:8080/audsat/bff/teste/produtos/valor/{valor}
+``
 
 #### Response completo em JSON:
+``sh
+{"valorTotal":"string","desconto":"string","comissao":"string"}
+``
 
-  - 
+#### Exemplos
+ - Chamando o Endpoint com valor abaixo de 5 mil:
+``sh
+http://localhost:8080/audsat/bff/teste/produtos/valor/456.32
+``
+
+ - Response com JSON esperado:
+``sh
+{"valorTotal":"670,79","desconto":"0,00","comissao":"22,82"}
+``
+
+
+ - Chamando o Endpoint com valor acima de 5 mil:
+``sh
+http://localhost:8080/audsat/bff/teste/produtos/valor/1500420.0
+``
+
+ - Response com JSON esperado:
+``sh
+{"valorTotal":"2.048.073,30","desconto":"157.544,10","comissao":"75.021,00"}
+``

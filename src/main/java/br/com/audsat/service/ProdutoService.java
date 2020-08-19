@@ -20,7 +20,7 @@ public class ProdutoService {
 	
 	public ProdutoDTO obterValor(Double valor) {
 		
-		var descontoTotal = 0.0;
+		var descontoTotal = 0.0d;
 		
 		comissaoTotal = (valor * valoresComponent.getComissaoVendedor());
 		
