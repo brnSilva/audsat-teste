@@ -7,7 +7,7 @@ A API foi construida para rodar em containers docker, então após baixar o proj
 
   - docker-compose up -d audsat-teste-api
   
-Após baixar todas as dependecias do projeto o serviço estará disponível para utilização no link abaixo:
+Após baixar todas as dependencias do projeto o serviço estará disponível para utilização no link abaixo:
 
   - http://localhost:8080/audsat/bff/teste/swagger-ui.html
 
