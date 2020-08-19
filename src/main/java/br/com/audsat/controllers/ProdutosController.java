@@ -1,5 +1,7 @@
 package br.com.audsat.controllers;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +19,8 @@ public class ProdutosController {
 	private ProdutoService produtoService;
 	
 	@GetMapping("/valor/desconto/{valor}")
-	public ProdutoDTO obtemValorComDesconto(@PathVariable Double valor) {
-		return produtoService.obtemValorComComissao(valor);
+	public ProdutoDTO obtemValorComDesconto(@PathVariable BigDecimal valor) {
+		return produtoService.obtemValorProduto(valor.doubleValue());
 	}
 
 }

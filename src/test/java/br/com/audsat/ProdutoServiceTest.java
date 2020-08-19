@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.audsat.dto.ProdutoDTO;
 import br.com.audsat.service.ProdutoService;
 
+@SpringBootTest
 class ProdutoServiceTest {
 
 	@Autowired
@@ -16,7 +18,8 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoSemDescontoComCentavos() {
 		
-		var retorno = produtoService.obtemValorComComissao(456.32);
+		
+		var retorno = produtoService.obtemValorProduto(456.32);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("670,79")
@@ -30,7 +33,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoSemDesconto() {
 		
-		var retorno = produtoService.obtemValorComComissao(500.0);
+		var retorno = produtoService.obtemValorProduto(500.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("735,00")
@@ -44,7 +47,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDesconto() {
 		
-		var retorno = produtoService.obtemValorComComissao(5000.0);
+		var retorno = produtoService.obtemValorProduto(5000.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.825,00")
@@ -58,7 +61,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDescontoComCentavos() {
 		
-		var retorno = produtoService.obtemValorComComissao(5009.99);
+		var retorno = produtoService.obtemValorProduto(5009.99);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.838,64")
@@ -72,7 +75,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDescontoEmMilhoes() {
 		
-		var retorno = produtoService.obtemValorComComissao(1500420.0);
+		var retorno = produtoService.obtemValorProduto(1500420.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("2.048.073,30")
