@@ -14,6 +14,6 @@ Após baixar todas as dependencias do projeto o serviço estará disponível par
 
 
 ## REST API
-| Endpoint | Method | Descrption |
+| Endpoint | Método| Descrição |
 |----------|--------|------------|
 | /produtos/valor/{valor} | GET  | Recebe o valor do produto em formato BigDecimal considerando até um ponto para os centavos. Ex.: 123.99 / 5352.2 / 1.25.  Retorna um JSON com o valor do produto, a comissão e o desconto (caso tenha)|
