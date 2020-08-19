@@ -18,7 +18,7 @@ public class ProdutoService {
 	
 	private Double comissaoTotal;
 	
-	public ProdutoDTO obtemValorProduto(Double valor) {
+	public ProdutoDTO obterValor(Double valor) {
 		
 		var descontoTotal = 0.0;
 		

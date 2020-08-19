@@ -18,9 +18,9 @@ public class ProdutosController {
 	@Autowired
 	private ProdutoService produtoService;
 	
-	@GetMapping("/valor/desconto/{valor}")
-	public ProdutoDTO obtemValorComDesconto(@PathVariable BigDecimal valor) {
-		return produtoService.obtemValorProduto(valor.doubleValue());
+	@GetMapping("/valor/{valor}")
+	public ProdutoDTO obterValor(@PathVariable BigDecimal valor) {
+		return produtoService.obterValor(valor.doubleValue());
 	}
 
 }

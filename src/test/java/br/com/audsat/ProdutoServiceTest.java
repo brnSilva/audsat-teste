@@ -19,7 +19,7 @@ class ProdutoServiceTest {
 	void testObtemValorComComissaoSemDescontoComCentavos() {
 		
 		
-		var retorno = produtoService.obtemValorProduto(456.32);
+		var retorno = produtoService.obterValor(456.32);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("670,79")
@@ -33,7 +33,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoSemDesconto() {
 		
-		var retorno = produtoService.obtemValorProduto(500.0);
+		var retorno = produtoService.obterValor(500.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("735,00")
@@ -47,7 +47,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDesconto() {
 		
-		var retorno = produtoService.obtemValorProduto(5000.0);
+		var retorno = produtoService.obterValor(5000.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.825,00")
@@ -61,7 +61,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDescontoComCentavos() {
 		
-		var retorno = produtoService.obtemValorProduto(5009.99);
+		var retorno = produtoService.obterValor(5009.99);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.838,64")
@@ -75,7 +75,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComComissaoComDescontoEmMilhoes() {
 		
-		var retorno = produtoService.obtemValorProduto(1500420.0);
+		var retorno = produtoService.obterValor(1500420.0);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("2.048.073,30")
