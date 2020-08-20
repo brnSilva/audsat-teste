@@ -1,13 +1,21 @@
 package br.com.audsat.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -36,8 +44,8 @@ public class SwaggerConfig {
 					.apis(RequestHandlerSelectors.basePackage("br.com.audsat.controllers"))
 					.paths(PathSelectors.any())
 					.build()
-//					.useDefaultResponseMessages(false)
-					
+					.useDefaultResponseMessages(false)
+					.globalResponseMessage(RequestMethod.GET, getResponse())
 //					.enableUrlTemplating(true)//.globalOperationParameters(parameters)
 					
 //					.ignoredParameterTypes(ApiIgnore.class)
@@ -55,6 +63,23 @@ public class SwaggerConfig {
 					.version("1.0.0")
 					.build();
 		
+	}
+	
+	private List<ResponseMessage> getResponse()
+	{
+	    return new ArrayList<ResponseMessage>() {
+			private static final long serialVersionUID = 1L;
+		{
+	        add(new ResponseMessageBuilder()
+	            .code(500)
+            .message("Quando ocorre um erro interno.\n" +
+            		"{\r\n" + 
+            		"	\"status\": \"int\",\r\n" + 
+            		"	\"erro\": \"string\",\r\n" + 
+            		"	\"mensagem\": \"string.\"\r\n" + 
+            		"}")
+	            .build());
+	    }};
 	}
 	
 }

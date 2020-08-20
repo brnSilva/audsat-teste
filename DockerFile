@@ -1,9 +1,9 @@
 FROM openjdk:11-jdk
 
-RUN mkdir app
-
-ADD target/audsat-teste*.jar /app/application.jar
-
 WORKDIR /app
 
-ENTRYPOINT java -jar /application.jar
+COPY target/audsat-teste*.jar /application.jar
+
+EXPOSE 8080
+
+CMD java -jar /application.jar

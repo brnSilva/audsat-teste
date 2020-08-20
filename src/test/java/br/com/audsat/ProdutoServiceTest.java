@@ -13,11 +13,10 @@ import br.com.audsat.service.ProdutoService;
 class ProdutoServiceTest {
 
 	@Autowired
-	private ProdutoService produtoService = new ProdutoService();
+	private ProdutoService produtoService;
 	
 	@Test
-	void testObtemValorComComissaoSemDescontoComCentavos() {
-		
+	void testObtemValorSemDescontoComCentavos() {
 		
 		var retorno = produtoService.obterValor(456.32);
 		
@@ -31,7 +30,7 @@ class ProdutoServiceTest {
 	}
 	
 	@Test
-	void testObtemValorComComissaoSemDesconto() {
+	void testObtemValorSemDesconto() {
 		
 		var retorno = produtoService.obterValor(500.0);
 		
@@ -45,7 +44,7 @@ class ProdutoServiceTest {
 	}
 	
 	@Test
-	void testObtemValorComComissaoComDesconto() {
+	void testObtemValorComDesconto() {
 		
 		var retorno = produtoService.obterValor(5000.0);
 		
@@ -59,7 +58,7 @@ class ProdutoServiceTest {
 	}
 	
 	@Test
-	void testObtemValorComComissaoComDescontoComCentavos() {
+	void testObtemValorComDescontoComCentavos() {
 		
 		var retorno = produtoService.obterValor(5009.99);
 		
@@ -73,7 +72,7 @@ class ProdutoServiceTest {
 	}
 	
 	@Test
-	void testObtemValorComComissaoComDescontoEmMilhoes() {
+	void testObtemValorComDescontoEmMilhoes() {
 		
 		var retorno = produtoService.obterValor(1500420.0);
 		

@@ -15,12 +15,12 @@ public class FormataMascaraComponent {
 		if(StringUtils.isEmpty(valor))
 			return "0,00";
 		
-		var unusualSymbols = new DecimalFormatSymbols();
+		var dfSymb = new DecimalFormatSymbols();
 		
-		unusualSymbols.setDecimalSeparator(',');
-		unusualSymbols.setGroupingSeparator('.');
+		dfSymb.setDecimalSeparator(',');
+		dfSymb.setGroupingSeparator('.');
 		
-		var df = new DecimalFormat("#,##0.00", unusualSymbols);
+		var df = new DecimalFormat("#,##0.00", dfSymb);
 		
 		return df.format(valor);
 	}
