@@ -26,19 +26,8 @@ public class SwaggerConfig {
 	
 	@Bean
 	public Docket docket() {
-		//Adding Header
-		var parameterBuilder = new ParameterBuilder();
-//		parameterBuilder.name("Authorization")
-//						.modelRef(new ModelRef("string"))
-//						.parameterType("header")
-//						.required(false)
-//						.build();
-//		var parameters = new ArrayList<Parameter>();
-//		parameters.add(parameterBuilder.build());
 		
 		return new Docket(DocumentationType.SWAGGER_2)
-//					.host("localhost:8080")
-//					.groupName("All")
 					.apiInfo(apiInfo())
 					.select()
 					.apis(RequestHandlerSelectors.basePackage("br.com.audsat.controllers"))
@@ -46,9 +35,6 @@ public class SwaggerConfig {
 					.build()
 					.useDefaultResponseMessages(false)
 					.globalResponseMessage(RequestMethod.GET, getResponse())
-//					.enableUrlTemplating(true)//.globalOperationParameters(parameters)
-					
-//					.ignoredParameterTypes(ApiIgnore.class)
 					;
 	}
 

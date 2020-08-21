@@ -23,7 +23,7 @@ public class ProdutosController {
 	
 	@ApiOperation(value = "Calcula o valor do produto.")
 	@GetMapping("/valor/{valor}")
-	public ProdutoDTO obterValor(@PathVariable BigDecimal valor) {
+	public ProdutoDTO calcularValor(@PathVariable BigDecimal valor) {
 		return produtoService.obterValor(valor.doubleValue());
 	}
 

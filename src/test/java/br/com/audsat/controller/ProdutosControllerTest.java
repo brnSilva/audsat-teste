@@ -18,11 +18,11 @@ public class ProdutosControllerTest {
 	
 	@Test
 	public void testEntradaValorNull() {
-		assertThrows(Exception.class, () -> produtosController.obterValor(null));
+		assertThrows(Exception.class, () -> produtosController.calcularValor(null));
 	}
 	
 	@Test
 	public void testEntradaValorVazio() {
-		assertThrows(Exception.class, () -> produtosController.obterValor(BigDecimal.valueOf(Double.parseDouble(("")))));
+		assertThrows(Exception.class, () -> produtosController.calcularValor(BigDecimal.valueOf(Double.parseDouble(("")))));
 	}
 }

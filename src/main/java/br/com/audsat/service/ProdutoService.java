@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import br.com.audsat.dto.ProdutoDTO;
 import br.com.audsat.enums.TipoCalculoEnum;
 import br.com.audsat.interfaces.CalculaValorInterface;
-import br.com.audsat.utils.FormataMascaraUtil;
 import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @Service
@@ -17,10 +16,9 @@ public class ProdutoService {
 	
 	private TipoCalculoEnum tipoCalculo;
 	
-	CalculaValorInterface calculaValor;
+	private CalculaValorInterface calculaValor;
 	
 	public ProdutoDTO obterValor(Double valor) {
-
 		
 		if(valor >= valoresPropertiesUtil.getValorDesconto()) {
 			
