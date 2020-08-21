@@ -3,10 +3,16 @@ A API Audsat-Teste-API é um projeto que tem o objetivo de retornar o valor de u
 
 
 ## Como executar
-A API foi construida para rodar em containers docker, então após baixar o projeto git, abrir o cmd dentro do local onde estiver o projeto e executar o comando abaixo:
+A API foi construida para rodar em containers docker, então após baixar o projeto git e realizar o build, deve-se criar uma imagem rodando o comando abaixo dentro do dir do projeto:
 ```sh
-docker-compose up -d audsat-teste-api
+docker build -t maven .
 ```
+
+Já há uma configuração no docker-compose.yml, então para rodar a imagem no Docker execute o comando abaixo:
+```sh
+docker-compose up -d
+```
+
 Após baixar todas as dependencias do projeto o serviço estará disponível para utilização no link abaixo:
 ```sh
 http://localhost:8080/audsat/bff/teste/swagger-ui.html
