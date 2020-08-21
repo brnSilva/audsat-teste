@@ -14,7 +14,8 @@ public class ProdutoDTO {
 	
 	private String valorTotal;
 	
-	private String desconto;
+	@Default
+	private String desconto = "0,00";
 	
 	private String comissao;
 	

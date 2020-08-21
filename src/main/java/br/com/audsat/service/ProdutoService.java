@@ -3,44 +3,37 @@ package br.com.audsat.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.audsat.components.FormataMascaraComponent;
-import br.com.audsat.components.ValoresComponent;
 import br.com.audsat.dto.ProdutoDTO;
+import br.com.audsat.enums.TipoCalculoEnum;
+import br.com.audsat.interfaces.CalculaValorInterface;
+import br.com.audsat.utils.FormataMascaraUtil;
+import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @Service
 public class ProdutoService {
 	
 	@Autowired
-	private FormataMascaraComponent formataMascara;
+	private ValoresPropertiesUtil valoresPropertiesUtil;
 	
-	@Autowired
-	private ValoresComponent valoresComponent;
+	private TipoCalculoEnum tipoCalculo;
 	
-	private Double comissaoTotal;
+	CalculaValorInterface calculaValor;
 	
 	public ProdutoDTO obterValor(Double valor) {
 
-		var descontoTotal = 0.0d;
 		
-		comissaoTotal = (valor * valoresComponent.getComissaoVendedor());
-		
-		valor += comissaoTotal;
-		
-		if(valor >= valoresComponent.getValorDesconto()) {
+		if(valor >= valoresPropertiesUtil.getValorDesconto()) {
 			
-			descontoTotal = (valor * valoresComponent.getDescontoCliente());
-			valor += (valor * valoresComponent.getLucroVendaDesconto());
+			tipoCalculo = TipoCalculoEnum.values()[0];
 			
 		} else {
 			
-			valor += (valor * valoresComponent.getLucroVenda());
-			
-		}
+			tipoCalculo = TipoCalculoEnum.values()[1];
 
-		return ProdutoDTO.builder()
-				.valorTotal(formataMascara.monetario(valor))
-				.desconto(formataMascara.monetario(descontoTotal))
-				.comissao(formataMascara.monetario(comissaoTotal))
-				.build();
+		}
+		
+		calculaValor = tipoCalculo.obterTipoCalculo();
+
+		return calculaValor.desconto(valor, valoresPropertiesUtil);
 	}
 }

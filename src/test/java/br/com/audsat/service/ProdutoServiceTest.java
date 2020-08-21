@@ -1,4 +1,4 @@
-package br.com.audsat;
+package br.com.audsat.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.audsat.service.ProdutoService;
 
 @SpringBootTest
-public class ExceptionTest {
+public class ProdutoServiceTest {
 	
 	@Autowired
 	private ProdutoService produtoService = new ProdutoService();

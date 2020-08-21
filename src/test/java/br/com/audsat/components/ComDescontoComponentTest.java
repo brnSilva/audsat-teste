@@ -1,43 +1,33 @@
-package br.com.audsat;
+package br.com.audsat.components;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.audsat.dto.ProdutoDTO;
-import br.com.audsat.service.ProdutoService;
+import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @SpringBootTest
-class ProdutoServiceTest {
+public class ComDescontoComponentTest {
 
 	@Autowired
-	private ProdutoService produtoService;
+	ComDescontoComponent comDescontoComponent;
+	
+	@Autowired
+	ValoresPropertiesUtil valoresPropertiesUtil;
 	
 	@Test
-	void testObtemValorSemDescontoComCentavos() {
+	void testObtemValorComDescontoComCentavos() {
 		
-		var retorno = produtoService.obterValor(456.32);
-		
-		var retornoEsperado = ProdutoDTO.builder()
-								.valorTotal("670,79")
-								.desconto("0,00")
-								.comissao("22,82")
-								.build();
-		
-		assertEquals(retornoEsperado, retorno);
-	}
-	
-	@Test
-	void testObtemValorSemDesconto() {
-		
-		var retorno = produtoService.obterValor(500.0);
+		var retorno = comDescontoComponent.desconto(670.79d, valoresPropertiesUtil);
 		
 		var retornoEsperado = ProdutoDTO.builder()
-								.valorTotal("735,00")
-								.desconto("0,00")
-								.comissao("25,00")
+								.valorTotal("915,63")
+								.desconto("70,43")
+								.comissao("33,54")
 								.build();
 		
 		assertEquals(retornoEsperado, retorno);
@@ -46,7 +36,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComDesconto() {
 		
-		var retorno = produtoService.obterValor(5000.0);
+		var retorno = comDescontoComponent.desconto(5000.0, valoresPropertiesUtil);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.825,00")
@@ -58,9 +48,9 @@ class ProdutoServiceTest {
 	}
 	
 	@Test
-	void testObtemValorComDescontoComCentavos() {
+	void testObtemValorComDescontoComCentavosAcimaMil() {
 		
-		var retorno = produtoService.obterValor(5009.99);
+		var retorno = comDescontoComponent.desconto(5009.99, valoresPropertiesUtil);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.838,64")
@@ -74,7 +64,7 @@ class ProdutoServiceTest {
 	@Test
 	void testObtemValorComDescontoEmMilhoes() {
 		
-		var retorno = produtoService.obterValor(1500420.0);
+		var retorno = comDescontoComponent.desconto(1500420.0, valoresPropertiesUtil);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("2.048.073,30")
@@ -84,5 +74,14 @@ class ProdutoServiceTest {
 		
 		assertEquals(retornoEsperado, retorno);
 	}
-
+	
+	@Test
+	void testObtemValorEntradaValorNull() {
+		assertThrows(Exception.class, () -> comDescontoComponent.desconto(null, valoresPropertiesUtil));
+	}
+	
+	@Test
+	void testObtemValorEntradaComissaoTotalInvalid() {
+		assertThrows(Exception.class, () -> comDescontoComponent.desconto(Double.parseDouble("1.1.23.1"), valoresPropertiesUtil));
+	}
 }
