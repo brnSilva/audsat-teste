@@ -70,9 +70,13 @@ public class SwaggerConfig {
 	    return new ArrayList<ResponseMessage>() {
 			private static final long serialVersionUID = 1L;
 		{
+			add(new ResponseMessageBuilder()
+				.code(400)
+				.message("Quano é informado um valor invalido.")
+				.build());
 	        add(new ResponseMessageBuilder()
 	            .code(500)
-            .message("Quando ocorre um erro interno.\n" +
+	            .message("Quando ocorre um erro interno.\n" +
             		"{\r\n" + 
             		"	\"status\": \"int\",\r\n" + 
             		"	\"erro\": \"string\",\r\n" + 
