@@ -7,22 +7,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.com.audsat.config.PropertiesConfig;
 import br.com.audsat.dto.ProdutoDTO;
-import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @SpringBootTest
 public class SemDescontoComponentTest {
 	
 	@Autowired
-	SemDescontoComponent semDescontoComponent;
+	private SemDescontoComponent semDescontoComponent;
 	
 	@Autowired
-	ValoresPropertiesUtil valoresPropertiesUtil;
+	private PropertiesConfig propertiesConfig;
 	
 	@Test
 	void testObtemValorSemDescontoComCentavos() {
 		
-		var retorno = semDescontoComponent.desconto(456.32, valoresPropertiesUtil);
+		var retorno = semDescontoComponent.desconto(456.32, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("670,79")
@@ -36,7 +36,7 @@ public class SemDescontoComponentTest {
 	@Test
 	void testObtemValorSemDesconto() {
 		
-		var retorno = semDescontoComponent.desconto(500.0, valoresPropertiesUtil);
+		var retorno = semDescontoComponent.desconto(500.0, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("735,00")
@@ -50,7 +50,7 @@ public class SemDescontoComponentTest {
 	@Test
 	void obtemValorSemDescontoComCentavos() {
 		
-		var retorno = semDescontoComponent.desconto(670.79, valoresPropertiesUtil);
+		var retorno = semDescontoComponent.desconto(670.79, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("986,06")
@@ -64,7 +64,7 @@ public class SemDescontoComponentTest {
 	@Test
 	void obtemValorSemDesconto() {
 		
-		var retorno = semDescontoComponent.desconto(2222.00, valoresPropertiesUtil);
+		var retorno = semDescontoComponent.desconto(2222.00, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("3.266,34")
@@ -77,11 +77,11 @@ public class SemDescontoComponentTest {
 	
 	@Test
 	void testObtemValorEntradaValorNull() {
-		assertThrows(Exception.class, () -> semDescontoComponent.desconto(null, valoresPropertiesUtil));
+		assertThrows(Exception.class, () -> semDescontoComponent.desconto(null, propertiesConfig));
 	}
 	
 	@Test
 	void testObtemValorEntradaComissaoTotalNull() {
-		assertThrows(Exception.class, () -> semDescontoComponent.desconto(Double.parseDouble("11.55.2.10"), valoresPropertiesUtil));
+		assertThrows(Exception.class, () -> semDescontoComponent.desconto(Double.parseDouble("11.55.2.10"), propertiesConfig));
 	}
 }

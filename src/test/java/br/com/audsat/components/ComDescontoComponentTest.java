@@ -7,22 +7,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.com.audsat.config.PropertiesConfig;
 import br.com.audsat.dto.ProdutoDTO;
-import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @SpringBootTest
 public class ComDescontoComponentTest {
 
 	@Autowired
-	ComDescontoComponent comDescontoComponent;
+	private ComDescontoComponent comDescontoComponent;
 	
 	@Autowired
-	ValoresPropertiesUtil valoresPropertiesUtil;
+	private PropertiesConfig propertiesConfig;
 	
 	@Test
 	void testObtemValorComDescontoComCentavos() {
 		
-		var retorno = comDescontoComponent.desconto(670.79d, valoresPropertiesUtil);
+		var retorno = comDescontoComponent.desconto(670.79d, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("915,63")
@@ -36,7 +36,7 @@ public class ComDescontoComponentTest {
 	@Test
 	void testObtemValorComDesconto() {
 		
-		var retorno = comDescontoComponent.desconto(5000.0, valoresPropertiesUtil);
+		var retorno = comDescontoComponent.desconto(5000.0, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.825,00")
@@ -50,7 +50,7 @@ public class ComDescontoComponentTest {
 	@Test
 	void testObtemValorComDescontoComCentavosAcimaMil() {
 		
-		var retorno = comDescontoComponent.desconto(5009.99, valoresPropertiesUtil);
+		var retorno = comDescontoComponent.desconto(5009.99, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("6.838,64")
@@ -64,7 +64,7 @@ public class ComDescontoComponentTest {
 	@Test
 	void testObtemValorComDescontoEmMilhoes() {
 		
-		var retorno = comDescontoComponent.desconto(1500420.0, valoresPropertiesUtil);
+		var retorno = comDescontoComponent.desconto(1500420.0, propertiesConfig);
 		
 		var retornoEsperado = ProdutoDTO.builder()
 								.valorTotal("2.048.073,30")
@@ -77,11 +77,11 @@ public class ComDescontoComponentTest {
 	
 	@Test
 	void testObtemValorEntradaValorNull() {
-		assertThrows(Exception.class, () -> comDescontoComponent.desconto(null, valoresPropertiesUtil));
+		assertThrows(Exception.class, () -> comDescontoComponent.desconto(null, propertiesConfig));
 	}
 	
 	@Test
 	void testObtemValorEntradaComissaoTotalInvalid() {
-		assertThrows(Exception.class, () -> comDescontoComponent.desconto(Double.parseDouble("1.1.23.1"), valoresPropertiesUtil));
+		assertThrows(Exception.class, () -> comDescontoComponent.desconto(Double.parseDouble("1.1.23.1"), propertiesConfig));
 	}
 }

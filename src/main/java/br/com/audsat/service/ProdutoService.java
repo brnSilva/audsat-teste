@@ -5,21 +5,21 @@ import org.springframework.stereotype.Service;
 
 import br.com.audsat.components.ComDescontoComponent;
 import br.com.audsat.components.SemDescontoComponent;
+import br.com.audsat.config.PropertiesConfig;
 import br.com.audsat.dto.ProdutoDTO;
 import br.com.audsat.interfaces.CalculaValorInterface;
-import br.com.audsat.utils.ValoresPropertiesUtil;
 
 @Service
-public class ProdutoService {
+public class ProdutoService  {
 	
 	@Autowired
-	private ValoresPropertiesUtil valoresPropertiesUtil;
+	private PropertiesConfig PropertiesConfig;
 	
 	private CalculaValorInterface calculaValor;
 	
 	public ProdutoDTO obterValor(Double valor) {
 		
-		if(valor >= valoresPropertiesUtil.getValorDesconto()) {
+		if(valor >= PropertiesConfig.getValorDesconto()) {
 			
 			calculaValor = new ComDescontoComponent();
 			
@@ -28,6 +28,6 @@ public class ProdutoService {
 			calculaValor = new SemDescontoComponent();
 		}
 
-		return calculaValor.desconto(valor, valoresPropertiesUtil);
+		return calculaValor.desconto(valor, PropertiesConfig);
 	}
 }
